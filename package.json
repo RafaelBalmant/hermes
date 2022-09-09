@@ -1,8 +1,8 @@
 {
-  "name": "solid_rest_01",
+  "name": "hermes",
   "version": "1.0.0",
   "main": "index.js",
-  "repository": "https://github.com/RafaelBalmant/solid_rest_01.git",
+  "repository": "https://github.com/RafaelBalmant/hermes",
   "author": "rafaelbb <balmantrafael@gmail.com>",
   "license": "MIT",
   "scripts": {

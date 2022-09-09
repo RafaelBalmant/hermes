@@ -6,18 +6,8 @@ import { Model } from "mongoose";
 class UsersRepository implements IUsersRepository {
   private userModel: Model<IUser>;
 
-  private static INSTANCE: UsersRepository;
-
-  private constructor() {
+  constructor() {
     this.userModel = User;
-  }
-
-  public static getInstance(): UsersRepository {
-    if (!UsersRepository.INSTANCE) {
-      UsersRepository.INSTANCE = new UsersRepository();
-    }
-
-    return UsersRepository.INSTANCE;
   }
 
   async create({ name, email, admin }: ICreateUserDTO): Promise<IUser> {
