@@ -8,7 +8,7 @@ interface ICreateUserDTO {
 
 interface IUsersRepository {
   create({ name, email }: ICreateUserDTO): Promise<IUser>;
-  findById(id: string): any;
+  findById(id: string): Promise<IUser>;
   findByEmail(email: string): any;
   turnAdmin(user: IUser): any;
   list(): any;

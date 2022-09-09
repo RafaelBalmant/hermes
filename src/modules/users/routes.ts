@@ -7,4 +7,8 @@ routes.post("/", (req, res) => {
   userController.createUser(req, res);
 });
 
+routes.get("/:id", (req, res) => {
+  userController.findUserById(req, res);
+});
+
 export { routes as userRoutes };

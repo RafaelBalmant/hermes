@@ -12,7 +12,7 @@ export class UserFunctionalities {
     email: string;
     name: string;
   }): Promise<IUser> {
-    const user = this.usersRepository.findByEmail(email);
+    const user = await this.usersRepository.findByEmail(email);
     if (!email || !name) {
       throw new Error("Email and name are mandatory fields");
     } else if (user) {
@@ -20,5 +20,13 @@ export class UserFunctionalities {
     } else {
       return this.usersRepository.create({ email, name });
     }
+  }
+
+  async findUserById(id: string): Promise<IUser> {
+    const user = await this.usersRepository.findById(id);
+    if (!user) {
+      throw Error("User not found");
+    }
+    return user;
   }
 }

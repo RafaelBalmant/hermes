@@ -28,7 +28,9 @@ class UsersRepository implements IUsersRepository {
     });
   }
 
-  findById(id: string): any {}
+  async findById(id: string): Promise<IUser> {
+    return this.userModel.findById(id);
+  }
 
   findByEmail(email: string): any {}
 
