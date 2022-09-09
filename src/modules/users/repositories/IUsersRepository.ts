@@ -1,4 +1,4 @@
-import { User } from "../entities/User";
+import { IUser } from "../../../interfaces/users";
 
 interface ICreateUserDTO {
   name: string;
@@ -7,11 +7,11 @@ interface ICreateUserDTO {
 }
 
 interface IUsersRepository {
-  create({ name, email }: ICreateUserDTO): User;
-  findById(id: string): User | undefined;
-  findByEmail(email: string): User | undefined;
-  turnAdmin(user: User): User;
-  list(): User[];
+  create({ name, email }: ICreateUserDTO): Promise<IUser>;
+  findById(id: string): any;
+  findByEmail(email: string): any;
+  turnAdmin(user: IUser): any;
+  list(): any;
 }
 
 export { IUsersRepository, ICreateUserDTO };

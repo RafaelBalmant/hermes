@@ -1,15 +1,15 @@
-import { v4 as uuidV4 } from "uuid";
-
-import { User } from "../entities/User";
 import { IUsersRepository, ICreateUserDTO } from "./IUsersRepository";
+import { IUser } from "../../../interfaces/users";
+import { User } from "../entities/User";
+import { Model } from "mongoose";
 
 class UsersRepository implements IUsersRepository {
-  private users: User[];
+  private userModel: Model<IUser>;
 
   private static INSTANCE: UsersRepository;
 
   private constructor() {
-    this.users = [];
+    this.userModel = User;
   }
 
   public static getInstance(): UsersRepository {
@@ -20,44 +20,21 @@ class UsersRepository implements IUsersRepository {
     return UsersRepository.INSTANCE;
   }
 
-  create({ name, email, admin }: ICreateUserDTO): User {
-    const newUser = {
-      id: uuidV4(),
+  async create({ name, email, admin }: ICreateUserDTO): Promise<IUser> {
+    return this.userModel.create({
       name,
+      admin,
       email,
-      admin: admin || false,
-      created_at: new Date(),
-      updated_at: new Date(),
-    };
-    this.users.push(newUser);
-    return newUser;
-  }
-
-  findById(id: string): User | undefined {
-    return this.users.find((user) => user.id === id);
-  }
-
-  findByEmail(email: string): User | undefined {
-    return this.users.find((user) => user.email === email);
-  }
-
-  turnAdmin(receivedUser: User): User {
-    const { id } = receivedUser;
-    this.users = this.users.map((user) => {
-      if (user.id === id) {
-        return {
-          ...user,
-          admin: true,
-        };
-      }
-      return user;
     });
-    return this.users.find((user) => user.id === id);
   }
 
-  list(): User[] {
-    return this.users;
-  }
+  findById(id: string): any {}
+
+  findByEmail(email: string): any {}
+
+  turnAdmin(receivedUser: IUser): any {}
+
+  list(): any {}
 }
 
 export { UsersRepository };

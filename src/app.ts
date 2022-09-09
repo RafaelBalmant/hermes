@@ -1,14 +1,19 @@
 import express from "express";
 import { userRoutes } from "./modules/users/routes";
+import { Database } from "./database";
+import * as dotenv from "dotenv";
+dotenv.config();
 
 class App {
   public server;
 
   constructor() {
+    const dataBase = new Database(process.env.uri_database);
     this.server = express();
     this.middlewares();
     this.routes();
-    console.log("Server is Running!");
+    dataBase.connectDatabase().then((res) => console.log(res));
+    console.log("server running");
   }
 
   middlewares() {
