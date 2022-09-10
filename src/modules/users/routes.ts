@@ -1,14 +1,12 @@
 import { Router } from "express";
-import { userController } from "./main";
+import { UserController } from "./controller";
 
 const routes = Router();
 
-routes.post("/", (req, res) => {
-  userController.createUser(req, res);
-});
+const userController: UserController = new UserController();
 
-routes.get("/:id", (req, res) => {
-  userController.findUserById(req, res);
-});
+routes.post("/", userController.createUser);
+
+routes.get("/:id", userController.findUserById);
 
 export { routes as userRoutes };

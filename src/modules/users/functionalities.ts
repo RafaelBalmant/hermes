@@ -1,9 +1,16 @@
 import { IUsersRepository } from "./repositories/IUsersRepository";
-import { User } from "./entities/User";
 import { IUser } from "../../interfaces/users";
+import { inject, injectable } from "tsyringe";
+import { ILogsRepository } from "../shared/logs/respositories/ILogsRepository";
 
+@injectable()
 export class UserFunctionalities {
-  constructor(private usersRepository: IUsersRepository) {}
+  constructor(
+    @inject("LogsRepository")
+    private logsRepository: ILogsRepository,
+    @inject("UsersRepository")
+    private usersRepository: IUsersRepository
+  ) {}
 
   async createUser({
     email,
@@ -18,7 +25,13 @@ export class UserFunctionalities {
     } else if (user) {
       throw new Error("User already exists");
     } else {
-      return this.usersRepository.create({ email, name });
+      const user = await this.usersRepository.create({ email, name });
+      await this.logsRepository.newLog({
+        service: "users",
+        response: JSON.stringify(user),
+        endpoint: "/users POST",
+      });
+      return user;
     }
   }
 
