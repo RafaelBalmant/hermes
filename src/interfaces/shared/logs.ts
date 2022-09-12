@@ -1,6 +1,6 @@
 export interface ILog {
   endpoint?: string;
-  service?: string;
+  type: string;
   request?: any;
   response?: any;
 }

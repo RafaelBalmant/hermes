@@ -10,8 +10,8 @@ class LogsRepository implements ILogsRepository {
     this.logsModel = Logs;
   }
 
-  async newLog({ service, response, endpoint, request }: ILog): Promise<ILog> {
-    return this.logsModel.create({ service, response, endpoint, request });
+  async newLog({ type, response, endpoint, request }: ILog): Promise<ILog> {
+    return this.logsModel.create({ type, response, endpoint, request });
   }
 }
 
