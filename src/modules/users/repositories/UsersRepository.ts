@@ -40,7 +40,7 @@ class UsersRepository implements IUsersRepository {
   turnAdmin(receivedUser: IUser): any {}
 
   async list(): Promise<IUser[]> {
-    return this.userModel.find({});
+    return this.userModel.find({}, { name: true, email: true });
   }
 }
 
