@@ -39,7 +39,9 @@ class UsersRepository implements IUsersRepository {
 
   turnAdmin(receivedUser: IUser): any {}
 
-  list(): any {}
+  async list(): Promise<IUser[]> {
+    return this.userModel.find({});
+  }
 }
 
 export { UsersRepository };
