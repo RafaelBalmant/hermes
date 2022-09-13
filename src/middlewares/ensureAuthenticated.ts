@@ -9,7 +9,7 @@ export async function ensureAuthenticated(
 ) {
   const authHeader = request.headers.authorization;
   if (!authHeader) {
-    throw new Error("Token missing");
+    response.status(201).send({ message: "Token missing" });
   }
   const [, token] = authHeader.split(" ");
   try {
