@@ -4,7 +4,6 @@ import { inject, injectable } from "tsyringe";
 import { ILogsRepository } from "../shared/logs/respositories/ILogsRepository";
 import { compare, hash } from "bcrypt";
 import { sign } from "jsonwebtoken";
-import { promises } from "dns";
 
 @injectable()
 export class UserFunctionalities {
