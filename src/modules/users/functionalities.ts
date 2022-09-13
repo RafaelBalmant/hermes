@@ -72,6 +72,10 @@ export class UserFunctionalities {
     return user;
   }
 
+  async listUsers(): Promise<IUser[]> {
+    return this.usersRepository.list();
+  }
+
   async authUser({
     email,
     password,

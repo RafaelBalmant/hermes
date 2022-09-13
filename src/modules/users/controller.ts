@@ -29,6 +29,16 @@ export class UserController {
     }
   }
 
+  async listUsers(request: Request, response: Response) {
+    try {
+      const userFunctionalities = container.resolve(UserFunctionalities);
+      const data = await userFunctionalities.listUsers();
+      return response.status(201).send(data);
+    } catch (e) {
+      return response.status(400).send({ error: String(e.message) });
+    }
+  }
+
   async authUser(request: Request, response: Response) {
     try {
       const { email, password } = request.body;

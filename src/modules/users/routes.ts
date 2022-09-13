@@ -12,4 +12,6 @@ routes.get("/:id", ensureAuthenticated, userController.findUserById);
 
 routes.post("/session", userController.authUser);
 
+routes.get("/", ensureAuthenticated, userController.listUsers);
+
 export { routes as userRoutes };
