@@ -15,7 +15,7 @@ interface IUsersRepository {
     email: string
   ): Promise<{ email: string; name: string; _id: ObjectId; password: string }>;
   turnAdmin(user: IUser): any;
-  list(): any;
+  list(): Promise<IUser[]>;
 }
 
 export { IUsersRepository, ICreateUserDTO };
