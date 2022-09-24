@@ -1,14 +1,15 @@
 import { Router } from "express";
-import { userController } from "./main";
+import { UserController } from "./controller";
+import { ensureAuthenticated } from "../../middlewares/ensureAuthenticated";
 
 const routes = Router();
 
-routes.post("/", (req, res) => {
-  userController.createUser(req, res);
-});
+const userController: UserController = new UserController();
 
-routes.get("/:id", (req, res) => {
-  userController.findUserById(req, res);
-});
+routes.post("/", ensureAuthenticated, userController.createUser);
+
+routes.get("/:id", ensureAuthenticated, userController.findUserById);
+
+routes.post("/session", userController.authUser);
 
 export { routes as userRoutes };

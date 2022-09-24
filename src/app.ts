@@ -1,7 +1,10 @@
 import express from "express";
+import "reflect-metadata";
 import { userRoutes } from "./modules/users/routes";
 import { Database } from "./database";
 import * as dotenv from "dotenv";
+import "./container";
+
 dotenv.config();
 
 class App {
